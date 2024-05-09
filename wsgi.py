@@ -1,4 +1,4 @@
-import jching
+from jching import app
 
 if __name__ == "__main__":
-    jching.app.run()
+    app.run()
