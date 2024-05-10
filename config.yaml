@@ -6,3 +6,12 @@ color_palette:
   yellow: ffc800
   green: 2c9f42
   purple: 8156a7
+
+tag_color:
+  tools: purple
+  projects: red
+  events: yellow
+  games: green
+  songs: green
+  shows: green
+  ideas: blue
