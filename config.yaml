@@ -1,1 +1,8 @@
 post_dir: posts
+
+color_palette:
+  red: de2c3b
+  blue: 2575ed
+  yellow: ffc800
+  green: 2c9f42
+  purple: 8156a7
