@@ -16,7 +16,7 @@ def get_post(post_file):
         post = yaml.safe_load(input)
 
         return {
-            'tag': ', '.join(post['tag']),
+            'tag': post['tag'],
             'date': post['date'],
             'post': markdown.markdown(post['post'])
         }
