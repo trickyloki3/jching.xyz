@@ -20,6 +20,7 @@ def get_post(post_file):
 
         return {
             'tag': post['tag'],
+            'meta': post['meta'],
             'date': post['date'],
             'post': markdown.markdown(post['post'])
         }
