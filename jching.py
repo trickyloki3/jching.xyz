@@ -9,4 +9,9 @@ post_list = post.get_post_list(config['post_dir'])
 
 @app.route("/")
 def index():
-    return flask.render_template('index.html', color_palette = config['color_palette'], post_list = post_list, tag_color = config['tag_color'])
+    return flask.render_template(
+        'index.html',
+        color_palette = config['color_palette'],
+        tag_color = config['tag_color'],
+        post_list = post_list
+    )
