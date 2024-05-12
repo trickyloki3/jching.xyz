@@ -16,7 +16,7 @@ def index():
     return flask.render_template(
         'index.html',
         **config,
-        post_list = post_list
+        post_list = post.filter_post_list(post_list, tag = flask.request.args.get('tag'))
     )
 
 @app.route("/<meta>")
