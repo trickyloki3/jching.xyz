@@ -24,5 +24,5 @@ def filter_by_meta(meta):
     return flask.render_template(
         'index.html',
         **config,
-        post_list = list(filter(lambda x: x['meta'] == meta, post_list))
+        post_list = post.filter_post_list(post_list, meta = meta)
     )

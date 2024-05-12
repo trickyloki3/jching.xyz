@@ -24,3 +24,9 @@ def get_post(post_file):
             'date': post['date'],
             'post': markdown.markdown(post['post'])
         }
+
+def filter_post_list(post_list, meta = None):
+    if meta:
+        post_list = list(filter(lambda x: x['meta'] == meta, post_list))
+
+    return post_list;
