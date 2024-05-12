@@ -20,9 +20,9 @@ def index():
     )
 
 @app.route("/<meta>")
-def filter_by_meta(meta):
+def meta(meta):
     return flask.render_template(
         'index.html',
         **config,
-        post_list = post.filter_post_list(post_list, meta = meta)
+        post_list = post.filter_post_list(post_list, meta = meta, tag = flask.request.args.get('tag'))
     )
