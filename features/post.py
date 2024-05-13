@@ -21,6 +21,7 @@ def get_post(post_file):
         return {
             'tag': post['tag'],
             'meta': post['meta'],
+            'hide' : post['hide'],
             'date': post['date'],
             'post': markdown.markdown(post['post'])
         }
@@ -28,6 +29,8 @@ def get_post(post_file):
 def filter_post_list(post_list, meta = None, tag = None):
     if meta:
         post_list = list(filter(lambda x: x['meta'] == meta, post_list))
+    else:
+        post_list = list(filter(lambda x: not x['hide'], post_list))
 
     if tag:
         post_list = list(filter(lambda x: tag in x['tag'], post_list))
