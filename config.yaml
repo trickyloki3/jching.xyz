@@ -1,4 +1,5 @@
 post_folder: posts
+post_pinned_folder: posts/pinned
 
 color_palette:
   red: de2c3b
