@@ -6,7 +6,7 @@ app = flask.Flask(
     template_folder='templates'
 )
 
-from features import config, post
+from features import config, post, form
 
 config = config.get_config('config.yaml')
 post_list = post.get_post_list(config['post_folder'])
@@ -21,8 +21,11 @@ def index():
         post_pinned_list = post.filter_post_list(post_pinned_list, tag = flask.request.args.get('tag'))
     )
 
-@app.route("/<meta>")
+@app.route("/<meta>", methods = ['GET', 'POST'])
 def meta(meta):
+    if flask.request.method == 'POST':
+        form.put_form(config['form_folder'], flask.request.form)
+
     return flask.render_template(
         'index.html',
         **config,
