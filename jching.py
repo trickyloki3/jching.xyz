@@ -22,7 +22,7 @@ def index(group = 'index'):
 
 @app.route("/<group>", methods = ['GET', 'POST'])
 def group(group):
-    if flask.request.method == 'POST':
+    if flask.request.method == 'POST' and group in post_dict:
         form.put_form(config['form_folder'], flask.request.form)
 
     return flask.render_template(
