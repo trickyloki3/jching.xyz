@@ -1,38 +1,49 @@
 import os
 import yaml
 import markdown
+import itertools
 
-def get_post_list(post_dir):
+def get_post_dict(folder):
+    post_list = get_post_list(folder)
+
+    # stable sort post list by date in descending order
+    post_list.sort(key = lambda x: x['date'], reverse = True)
+
+    # index contains all public post (hide = False)
+    post_dict = {
+        'index': list(filter(lambda x: not x['hide'], post_list))
+    }
+
+    # stable sort post list by group
+    post_list.sort(key = lambda x: x['group'])
+    for group, post_list in itertools.groupby(post_list, lambda x : x['group']):
+        post_dict[group] = list(post_list)
+
+    return post_dict;
+
+def get_post_list(folder):
     post_list = []
 
-    for post_file in os.listdir(post_dir):
-        if post_file.endswith('.yaml'):
-            post_list.append(get_post(os.path.join(post_dir, post_file)))
-
-    # sort post list by date in descending order
-    post_list.sort(key = lambda x: x['date'], reverse = True)
+    for root, _, file_list in os.walk(folder):
+        for file in file_list:
+            path = os.path.join(root, file)
+            if path.endswith('yaml'):
+                post_list.append(get_post(path))
 
     return post_list
 
-def get_post(post_file):
-    with open(post_file) as input:
+def get_post(path):
+    with open(path) as input:
+        path = path.split('/')[-2:]
         post = yaml.safe_load(input)
 
         return {
+            'group': path[0],
             'tag': post['tag'],
-            'meta': post['meta'],
             'hide' : post['hide'],
             'date': post['date'],
             'post': markdown.markdown(post['post'])
         }
 
-def filter_post_list(post_list, meta = None, tag = None):
-    if meta:
-        post_list = list(filter(lambda x: x['meta'] == meta, post_list))
-    else:
-        post_list = list(filter(lambda x: not x['hide'], post_list))
-
-    if tag:
-        post_list = list(filter(lambda x: tag in x['tag'], post_list))
-
-    return post_list;
+def filter_by_tag(post_list, tag):
+    return list(filter(lambda x: tag in x['tag'], post_list)) if tag else post_list
