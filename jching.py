@@ -17,7 +17,7 @@ def index(group = 'index'):
         'index.html',
         **config,
         group = group,
-        post_list = post.filter_by_tag(post_dict[group], flask.request.args.get('tag'))
+        column_list = post.get_column_list(post_dict[group], flask.request.args.get('tag'))
     )
 
 @app.route("/<group>", methods = ['GET', 'POST'])
@@ -29,5 +29,5 @@ def group(group):
         'index.html',
         **config,
         group = group,
-        post_list = post.filter_by_tag(post_dict[group], flask.request.args.get('tag'))
+        column_list = post.get_column_list(post_dict[group], flask.request.args.get('tag'))
     )
