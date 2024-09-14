@@ -22,6 +22,9 @@ def index(group = 'index'):
 
 @app.route("/<group>", methods = ['GET', 'POST'])
 def group(group):
+    if group not in post_dict:
+        return flask.redirect(flask.url_for('index'))
+
     if flask.request.method == 'POST' and group in post_dict:
         form.put_form(config['form_folder'], group, flask.request.form)
 
