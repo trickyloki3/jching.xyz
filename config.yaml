@@ -2,6 +2,8 @@ app_name: jching.xyz
 
 form_folder: forms
 post_folder: posts
+file_folder: files
+temp_folder: templates
 
 color_palette:
   red: de2c3b

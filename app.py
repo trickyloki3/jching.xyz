@@ -1,15 +1,15 @@
 import flask
 
-app = flask.Flask(
-    __name__,
-    static_folder='files',
-    template_folder='templates'
-)
-
 from features import config, post, form
 
 config = config.get_config('config.yaml')
 post_dict = post.get_post_dict(config['post_folder'])
+
+app = flask.Flask(
+    config['app_name'],
+    static_folder = config['file_folder'],
+    template_folder = config['temp_folder']
+)
 
 @app.route("/")
 def index(group = 'index'):
